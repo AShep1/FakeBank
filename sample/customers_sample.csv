@@ -1,0 +1,16 @@
+customer_id,name,date_of_birth,address,customer_since,segment,state,postcode,industry
+CUST00001,Allison Hill,1959-12-03,"8 Brittany Avenue, East Jefferyhaven, ACT, 9386",2019-06-25,SME,VIC,609,Retail Trade
+CUST00002,Donald Booth,1996-05-15,"423/11 Davis Highroad, Lindsaymouth, NSW, 2981",2025-02-14,Retail,WA,2486,Mining
+CUST00003,Mark Mcclure,1969-05-05,"341 Michelle Laneway, Shawnstad, NT, 2975",2019-04-18,SME,VIC,9874,Agriculture
+CUST00004,Mia Sutton,1949-08-04,"764 Gabrielle Walk, South Lydiamouth, VIC, 2813",2025-05-19,Retail,VIC,3782,
+CUST00005,Emily Rios,1971-08-28,"23 Burgess Motorway, Coxberg, WA, 2401",2018-05-01,SME,NSW,9395,
+CUST00006,Rebecca Henderson,1949-01-20,"8/80 Erin Reach, Kaylamouth, NSW, 2926",2018-06-03,SME,ACT,3811,Professional Services
+CUST00007,Troy Liu,1962-08-28,"4 Eric Wade, North Carol, WA, 2015",2020-12-17,Corporate,NSW,2815,Health Care & Social Assistance
+CUST00008,David Bradley,1950-02-03,"Flat 82 782 Rose Rosebowl, Brandtside, QLD, 2936",2022-01-31,Corporate,SA,2747,
+CUST00009,Joseph Martinez,1960-01-09,"Apt. 983 3 Chad Run, South Carloston, TAS, 2383",2020-06-20,Corporate,VIC,1719,Mining
+CUST00010,Cindy Anderson,2004-10-11,"63 Collin Mount, Rodneymouth, ACT, 2506",2021-07-03,Corporate,TAS,4533,
+CUST00011,Ashley Lee,1981-03-24,"24 Wright Brow, Mortonside, NSW, 2280",2017-04-26,SME,NT,8985,
+CUST00012,Sarah Martin,1977-10-12,"02 Smith Line, Saramouth, SA, 2608",2024-01-05,Corporate,VIC,9244,Professional Services
+CUST00013,Edward Novak,1984-02-23,"Apt. 097 8 Brian Quadrangle, West Caseyland, QLD, 2991",2025-06-03,Corporate,WA,1339,
+CUST00014,Kristopher Harvey,1973-04-05,"Unit 53 62 Bryant View, North Stephenshire, NSW, 2383",2024-05-03,SME,WA,4941,
+CUST00015,Timothy Ibarra,2004-07-26,"Level 2 84 Elizabeth Ride, Sarahville, NT, 2711",2025-02-21,Retail,VIC,6427,Education & Training
