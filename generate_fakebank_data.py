@@ -164,14 +164,14 @@ for as_of_idx, as_of_date in enumerate(DATES):
     for i in range(N_LOANS):
         cust = customers[i % N_CUSTOMERS]
         financials = random_financials() if cust['segment'] != 'Retail' else {}
-        # Balance logic with upward trend and variability
+        # Balance logic with upward trend and increased volatility
         if as_of_idx == 0:
             balance = random.randint(10_000, 1_000_000)
         else:
             prev = loans[-N_LOANS]
             is_material = (i % 100 == 0)
-            # Monthly mean increase of ~0.33% (4% p.a.), std dev 2%
-            change_pct = np.random.normal(loc=0.0033, scale=0.02) if not is_material else np.random.normal(loc=0.0033, scale=0.25)
+            # Monthly mean increase of ~0.33% (4% p.a.), std dev 6% for more volatility
+            change_pct = np.random.normal(loc=0.0033, scale=0.06) if not is_material else np.random.normal(loc=0.0033, scale=0.35)
             balance = max(0, round(prev['loan_amount'] * (1 + change_pct), 2))
         # PD/LGD migration
         if as_of_idx == 0:
@@ -287,20 +287,20 @@ liquidity_positions = []
 for as_of_date in DATES:
     for i in range(N_LIQUIDITY_POSITIONS):
         cust = customers[i % N_CUSTOMERS]
-        # Balance logic
+        # Amount logic
         if as_of_date == DATES[0]:
             amount = random.randint(10_000, 10_000_000)
         else:
             prev = liquidity_positions[-N_LIQUIDITY_POSITIONS]
             change_pct = random.uniform(-0.1, 0.1)
             amount = max(0, round(prev['amount'] * (1 + change_pct), 2))
-        
         liquidity_positions.append({
             'position_id': f'LP{i+1:06d}',
             'as_of_date': as_of_date.strftime('%Y-%m-%d'),
             'customer_id': cust['customer_id'],
             'asset_type': random_choice(ASSET_TYPES),
             'amount': amount,
+            'geography': cust['state'],
             'maturity_date': fake.date_between(start_date=as_of_date, end_date='+5y') if random.random() > 0.3 else None
         })
 liquidity_positions_df = pd.DataFrame(liquidity_positions)
@@ -546,7 +546,7 @@ for folder in [DATA_DIR, 'sample', 'summary']:
             except Exception as e:
                 print(f'Could not remove {f}: {e}')
 
-# Save head(15) of each table to 'sample' folder
+# Save head(15) of each table to 'sample' folder as CSV
 sample_dir = 'sample'
 os.makedirs(sample_dir, exist_ok=True)
 for df, name in [
@@ -555,7 +555,15 @@ for df, name in [
     (applications_df, 'loan_applications'),
     (write_offs_df, 'write_offs'),
     (interactions_df, 'customer_interactions'),
-    (securities_df, 'loan_securities')
+    (securities_df, 'loan_securities'),
+    (liquidity_positions_df, 'liquidity_positions'),
+    (funding_sources_df, 'funding_sources'),
+    (liquidity_metrics_df, 'liquidity_metrics'),
+    (liquidity_events_df, 'liquidity_events'),
+    (market_positions_df, 'market_positions'),
+    (market_risk_metrics_df, 'market_risk_metrics'),
+    (instrument_prices_df, 'instrument_prices'),
+    (market_events_df, 'market_events')
 ]:
     df.head(15).to_csv(os.path.join(sample_dir, f'{name}_sample.csv'), index=False)
 
@@ -660,68 +668,31 @@ def plot_stacked_by_dimension(df, value_col, dimension_col, filename, aggfunc='s
     plt.ylabel(value_col)
     plt.xlabel("as_of_date")
     plt.tight_layout()
-    plt.savefig(os.path.join(summary_dir, filename))
+    plt.savefig(os.path.join(summary_dir, os.path.basename(filename)))
     plt.close()
 
-# Loans: stacked by industry and sales_channel
+# Update all calls to plot_stacked_by_dimension to use only the filename, not a path
 plot_stacked_by_dimension(loans_df, 'loan_amount', 'industry', 'loans_by_industry_stacked.png')
 plot_stacked_by_dimension(loans_df, 'loan_amount', 'sales_channel', 'loans_by_channel_stacked.png')
 plot_stacked_by_dimension(loans_df, 'loan_amount', 'product_type', 'loans_by_product_type_stacked.png')
 plot_stacked_by_dimension(loans_df, 'loan_amount', 'credit_rating', 'loans_by_credit_rating_stacked.png')
 plot_stacked_by_dimension(loans_df, 'loan_amount', 'lgd_rating', 'loans_by_lgd_rating_stacked.png')
-
-# Loan Applications: stacked by product_type and status
 plot_stacked_by_dimension(applications_df, 'amount_requested', 'product_type', 'applications_by_product_type_stacked.png')
 plot_stacked_by_dimension(applications_df, 'amount_requested', 'status', 'applications_by_status_stacked.png')
-
-# Write Offs: stacked by reason
 plot_stacked_by_dimension(write_offs_df, 'amount_written_off', 'reason', 'write_offs_by_reason_stacked.png')
-
-# Customer Interactions: stacked by interaction_type (count)
 if 'as_of_date' in interactions_df.columns:
     interactions_df['as_of_date'] = pd.to_datetime(interactions_df['interaction_date']).dt.strftime('%Y-%m-%d')
 plot_stacked_by_dimension(interactions_df, 'interaction_id', 'interaction_type', 'interactions_by_type_stacked.png', aggfunc='count')
-
-# Loan Securities: stacked by security_type and lien_type
 plot_stacked_by_dimension(securities_df, 'security_value', 'security_type', 'securities_by_type_stacked.png')
 plot_stacked_by_dimension(securities_df, 'security_value', 'lien_type', 'securities_by_lien_type_stacked.png')
-
-# --- Liquidity Risk Charts ---
 if 'liquidity_positions_df' in locals():
-    plot_stacked_by_dimension(
-        liquidity_positions_df,
-        value_col='amount',
-        dimension_col='asset_type',
-        filename=os.path.join(summary_dir, 'liquidity_by_asset_type_stacked.png')
-    )
-    plot_stacked_by_dimension(
-        liquidity_positions_df,
-        value_col='amount',
-        dimension_col='geography',
-        filename=os.path.join(summary_dir, 'liquidity_by_geography_stacked.png')
-    )
+    plot_stacked_by_dimension(liquidity_positions_df, 'amount', 'asset_type', 'liquidity_by_asset_type_stacked.png')
+    plot_stacked_by_dimension(liquidity_positions_df, 'amount', 'geography', 'liquidity_by_geography_stacked.png')
 if 'funding_sources_df' in locals():
-    plot_stacked_by_dimension(
-        funding_sources_df,
-        value_col='amount',
-        dimension_col='source_type',
-        filename=os.path.join(summary_dir, 'funding_by_source_type_stacked.png')
-    )
-
-# --- Market Risk Charts ---
+    plot_stacked_by_dimension(funding_sources_df, 'amount', 'source_type', 'funding_by_source_type_stacked.png')
 if 'market_positions_df' in locals():
-    plot_stacked_by_dimension(
-        market_positions_df,
-        value_col='market_value',
-        dimension_col='instrument',
-        filename=os.path.join(summary_dir, 'market_by_instrument_stacked.png')
-    )
-    plot_stacked_by_dimension(
-        market_positions_df,
-        value_col='market_value',
-        dimension_col='desk',
-        filename=os.path.join(summary_dir, 'market_by_desk_stacked.png')
-    )
+    plot_stacked_by_dimension(market_positions_df, 'market_value', 'instrument', 'market_by_instrument_stacked.png')
+    plot_stacked_by_dimension(market_positions_df, 'market_value', 'desk', 'market_by_desk_stacked.png')
 
 print('Stacked column profiling charts for all tables generated.')
 print('Stacked column profiling charts for liquidity and market risk tables generated.')

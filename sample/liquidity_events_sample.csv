@@ -1,0 +1,16 @@
+event_id,as_of_date,event_type,event_details
+LE00001,2024-09-30,Deposit,"Large deposit of $5,201,484 from corporate customers"
+LE00002,2024-04-30,Stress,Regulatory stress test scenario
+LE00003,2025-02-28,Stress,Market volatility stress test scenario
+LE00004,2023-12-31,Stress,Internal stress test - severe economic downturn
+LE00005,2024-01-31,Deposit,"Large deposit of $384,405 from corporate customers"
+LE00006,2023-12-31,Deposit,"Large deposit of $4,781,070 from institutional customers"
+LE00007,2024-09-30,Withdrawal,"Large withdrawal of $292,492 from corporate customers"
+LE00008,2024-11-30,Withdrawal,"Large withdrawal of $6,538,494 from corporate customers"
+LE00009,2025-01-31,Deposit,"Large deposit of $5,636,625 from corporate customers"
+LE00010,2024-01-31,Deposit,"Large deposit of $6,084,555 from corporate customers"
+LE00011,2024-07-31,Stress,Regulatory stress test scenario
+LE00012,2025-07-31,Stress,Liquidity stress test - bank run scenario
+LE00013,2025-04-30,Stress,Internal stress test - severe economic downturn
+LE00014,2023-12-31,Withdrawal,"Large withdrawal of $3,824,196 from retail customers"
+LE00015,2025-07-31,Withdrawal,"Large withdrawal of $7,343,246 from institutional customers"

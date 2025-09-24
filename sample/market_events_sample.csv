@@ -1,0 +1,16 @@
+event_id,as_of_date,instrument,event_type,event_details
+ME00001,2025-01-31,Derivative,Shock,Volatility spike
+ME00002,2024-10-31,Derivative,Regulatory,ASIC market conduct review
+ME00003,2024-01-31,ASX Equity,News,Major economic data release
+ME00004,2024-08-31,Derivative,Regulatory,APRA regulatory update
+ME00005,2025-01-31,Derivative,News,Major economic data release
+ME00006,2025-01-31,ASX Equity,Regulatory,ASIC market conduct review
+ME00007,2025-08-31,Derivative,Regulatory,ASIC market conduct review
+ME00008,2025-04-30,ASX Equity,Shock,Flash crash event
+ME00009,2024-04-30,Derivative,Shock,Market shock - significant price movement
+ME00010,2024-02-29,ASX Equity,Regulatory,APRA regulatory update
+ME00011,2025-06-30,AUD Bond,Regulatory,ASIC market conduct review
+ME00012,2024-02-29,FX Pair,Regulatory,New capital requirements announced
+ME00013,2025-01-31,FX Pair,Shock,Market shock - significant price movement
+ME00014,2025-09-30,AUD Bond,Shock,Liquidity shock in market
+ME00015,2025-05-31,ASX Equity,Regulatory,New capital requirements announced
