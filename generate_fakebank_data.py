@@ -16,6 +16,15 @@ fake.seed_instance(SEED)
 # Output folder
 DATA_DIR = 'data'
 os.makedirs(DATA_DIR, exist_ok=True)
+# Purge old .png, .parquet, and .csv files in output folders BEFORE generating new ones
+import glob
+for folder in [DATA_DIR, 'sample', 'summary']:
+    for ext in ('*.png', '*.parquet', '*.csv'):
+        for f in glob.glob(os.path.join(folder, ext)):
+            try:
+                os.remove(f)
+            except Exception as e:
+                print(f'Could not remove {f}: {e}')
 
 # Date range
 END_DATE = datetime(2025, 9, 30)
@@ -536,15 +545,7 @@ print('    - market_risk_metrics.parquet')
 print('    - instrument_prices.parquet')
 print('    - market_events.parquet')
 
-# Purge old .png, .parquet, and .csv files in output folders
-import glob
-for folder in [DATA_DIR, 'sample', 'summary']:
-    for ext in ('*.png', '*.parquet', '*.csv'):
-        for f in glob.glob(os.path.join(folder, ext)):
-            try:
-                os.remove(f)
-            except Exception as e:
-                print(f'Could not remove {f}: {e}')
+# (Old purge moved to top of file to avoid removing freshly generated outputs)
 
 # Save head(15) of each table to 'sample' folder as CSV
 sample_dir = 'sample'

@@ -4,3 +4,6 @@ data/
 *.parquet
 **/*.parquet
 *.pyc
+# Local environment files
+.env
+*.env

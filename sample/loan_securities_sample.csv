@@ -1,16 +1,16 @@
 security_id,loan_id,as_of_date,security_type,security_value,address,lien_type,ownership_details
-SEC000001,LOAN000001,2023-11-30,Deposit,774372.14,"51 William Thoroughfare, Jameshaven, WA, 1363",First Lien,Jean Rivera
-SEC000002,LOAN000002,2023-11-30,Property,1034273.57,"20 Jaime Lane, Orrside, WA, 2619",First Lien,John Morton
-SEC000003,LOAN000003,2023-11-30,Vehicle,640871.15,"171/6 William Mall, St. Michael, ACT, 2909",Third Lien,Sarah Adams
-SEC000004,LOAN000004,2023-11-30,Property,375689.82,"Unit 63 09 Contreras Roads, Lake Ashley, ACT, 2579",Second Lien,Mary Garcia
-SEC000005,LOAN000005,2023-11-30,Property,412451.64,"46 Luke Common, Lake Eric, VIC, 2911",Third Lien,Colleen Haynes
-SEC000006,LOAN000006,2023-11-30,Deposit,976444.11,"96 Kristina Trail, Leroyton, VIC, 2607",Third Lien,Rhonda Fisher
-SEC000007,LOAN000007,2023-11-30,Property,552130.19,"Unit 00 079 Compton Driveway, St. Theresa, WA, 2929",Third Lien,Kathleen Ballard
-SEC000008,LOAN000008,2023-11-30,Equipment,1419853.08,"Flat 46 8 Ryan Terrace, South Justin, TAS, 2663",Second Lien,John Gonzalez
-SEC000009,LOAN000009,2023-11-30,Property,219702.54,"Flat 88 75 Ryan Lower, Welchview, ACT, 8247",Third Lien,Jason Wallace
-SEC000010,LOAN000010,2023-11-30,Property,889457.22,"Level 2 504 Salazar Rue, East Josephshire, TAS, 2254",Third Lien,Valerie Burns
-SEC000011,LOAN000011,2023-11-30,Equipment,480882.76,"7 Sean Hill, St. Nicholas, VIC, 2232",Second Lien,Brenda Donaldson
-SEC000012,LOAN000012,2023-11-30,Equipment,318603.84,"3 Scott Hill, Timothyborough, SA, 2458",First Lien,Jane Jones
-SEC000013,LOAN000013,2023-11-30,Equipment,861813.23,"Suite 665 81 Judy Route, Stephanieberg, NSW, 2613",First Lien,Julie Rodriguez
-SEC000014,LOAN000014,2023-11-30,Equipment,1318125.3,"468 Alicia Centre, New Anthony, NSW, 2635",Second Lien,Michael David
-SEC000015,LOAN000015,2023-11-30,Equipment,331990.74,"3 David Court, Katieside, NSW, 2622",Third Lien,William Ware
+SEC000001,LOAN000001,2023-11-30,Deposit,774372.14,"Level 2 5 Stephanie Ramp, Meyerberg, NT, 2918",First Lien,Vincent Wilson
+SEC000002,LOAN000002,2023-11-30,Property,1034273.57,"Flat 77 24 Wong Road, South Danielshire, NSW, 2920",First Lien,Mary Brown
+SEC000003,LOAN000003,2023-11-30,Vehicle,640871.15,"Flat 98 240 Hamilton Heights, East Tyler, VIC, 6807",Third Lien,Jennifer Turner
+SEC000004,LOAN000004,2023-11-30,Property,375689.82,"248 David State Highway, East Amyside, WA, 0287",Second Lien,Jessica Miller
+SEC000005,LOAN000005,2023-11-30,Property,412451.64,"55 Carter Walk, Fishermouth, QLD, 2987",Third Lien,David Turner
+SEC000006,LOAN000006,2023-11-30,Deposit,976444.11,"08 Michael Highroad, Port Brian, NT, 0234",Third Lien,Emily Smith
+SEC000007,LOAN000007,2023-11-30,Property,552130.19,"167 Robert Link, Loganview, QLD, 2683",Third Lien,Teresa Hernandez
+SEC000008,LOAN000008,2023-11-30,Equipment,1419853.08,"332 Manuel View, Maxwellmouth, WA, 2648",Second Lien,Lauren Berry
+SEC000009,LOAN000009,2023-11-30,Property,219702.54,"0 Anne Upper, Kathymouth, NT, 2994",Third Lien,Madison Church
+SEC000010,LOAN000010,2023-11-30,Property,889457.22,"160 Weber Quadrangle, Port Monicafurt, TAS, 2619",Third Lien,John Gomez
+SEC000011,LOAN000011,2023-11-30,Equipment,480882.76,"8 Tara Intersection, Sandovalhaven, WA, 9438",Second Lien,Amber Carpenter
+SEC000012,LOAN000012,2023-11-30,Equipment,318603.84,"457 Jarvis Slope, Joeburgh, WA, 2687",First Lien,Christopher Irwin
+SEC000013,LOAN000013,2023-11-30,Equipment,861813.23,"442/931 Jennifer Brow, Port Frederick, SA, 1508",First Lien,Christina Mcclain
+SEC000014,LOAN000014,2023-11-30,Equipment,1318125.3,"771/31 Krueger Riverway, New Matthewtown, TAS, 2947",Second Lien,Anthony Melendez
+SEC000015,LOAN000015,2023-11-30,Equipment,331990.74,"7 Michael Vale, New Brian, TAS, 0846",Third Lien,Tony Scott

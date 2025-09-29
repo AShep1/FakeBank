@@ -1,3 +1,118 @@
+```markdown
+# Risk Management Framework
+
+Version: 1.0
+Effective Date: 2025-10-01
+
+## Purpose
+Provide the consolidated governance and control framework that ties Credit, Market and Liquidity policies into an auditable program mapped to the FakeBank datasets. It defines owners, reporting cadence, and cross-risk escalation.
+
+## Principles
+- Data-first measurement: every limit must reference a dataset field and aggregation method.
+- Proportional escalation: three-tiered thresholds (Green/Amber/Red) with defined notifications and remediation timelines.
+- Reproducibility: calculation scripts and datasets must be version-controlled. Use seeded generator runs for repeatable scenarios.
+
+## Roles & Responsibilities
+- Board: approves the overall risk appetite and materially changes limits.
+- CRO: operational owner of the RMF and approves escalation recommendations.
+- Risk Analytics: computes metrics, runs stress tests, and prepares reports.
+- Business Units: operate within limits and deliver remediation when requested.
+
+## Integrated Reporting
+- Monthly Integrated Risk Report (per `as_of_date`) to include CAR, credit risk health, market risk positions, liquidity metrics and top concentration exposures.
+
+## Cross-risk Escalation Examples
+- Combined stress (market shock causing collateral calls leading to liquidity stress): automatically trigger Capital Adequacy escalation workflow if CAR would fall below Amber in scenario.
+
+## Data & Model Governance
+- Version control for generator code, calculation scripts and scenario definitions.
+- Unit tests and sample runs with `SEED=42` to validate calculations.
+
+--
+This Risk Management Framework is synthetic and intended for testing, analytics and training.
+```
+```markdown
+# Risk Management Framework
+
+Version: 1.0
+Effective Date: 2025-10-01
+
+## Purpose
+Provide a consolidated framework for identifying, measuring, monitoring and governing material risks (Credit, Market, Liquidity) using the FakeBank synthetic datasets.
+
+## Principles
+- Consistent measurement: use `as_of_date` snapshots and agreed definitions (EAD, RWA, VaR, LCR, NSFR).
+- Data-driven governance: every threshold and escalation must be measurable using the dataset fields.
+- Proportionality and escalation: three-tier thresholds (Green/Amber/Red) with owners and timelines.
+
+## Roles & Responsibilities
+- Board: approves risk appetite and material limits.
+- CRO: owns RMF and approves remediation.
+- Risk Analytics: produces monthly metrics and stress-test packs.
+- Business Units: operate within limits and deliver remediation plans when required.
+
+## Integrated Reporting
+- Monthly Integrated Risk Report covering CAR, credit portfolio health, market risk exposures and liquidity metrics, all by `as_of_date`.
+
+## Threshold Mapping Examples
+- CAR: Green >=12%, Amber 10.5%-12%, Red <10.5%.
+- LCR: Green >=115%, Amber 110%-115%, Red <110%.
+- Desk VaR: Green <80% of limit, Amber 80%-100%, Red >100%.
+
+## Stress Testing
+- Run reverse stress tests and scenario analysis using the synthetic time series across `as_of_date`.
+
+## Data Governance
+- Maintain version control for generator, scripts and calculation logic. Use seeded runs (`SEED=42`) for reproducible tests.
+- Data quality targets: >99% completeness for mandatory fields, <1% orphan records.
+
+--
+This RMF is tailored for use with the FakeBank synthetic datasets for testing, analytics and training.
+```
+```markdown
+# Risk Management Framework
+
+Version: 1.0
+Effective Date: 2025-10-01
+
+## Purpose
+Provide a consolidated risk management framework that ties together Credit, Market and Liquidity risk policies and maps them to the synthetic dataset for governance, monitoring and testing.
+
+## Principles
+- Risk identification: use `customer`, `loans`, `market_positions`, and `liquidity_positions` tables to identify exposures.
+- Risk measurement: adopt consistent risk measures (EAD, RWA, VaR, LCR, NSFR) computed from `as_of_date` snapshots.
+- Risk governance: define owners (CRO, Head of Credit, Head of Trading, CFO) and reporting cadence.
+
+## Roles and Responsibilities
+- Board: approves risk appetite and material limits.
+- CRO: overall risk oversight, approves frameworks and escalation thresholds.
+- Risk Analytics: compute metrics, run stress tests, and produce monthly reports.
+- Business Units: operate within limits, remediate breaches and report exceptions.
+
+## Integrated Reporting
+- Produce a monthly Integrated Risk Report that includes:
+  - Capital Adequacy time series (see Capital Adequacy Framework)
+  - Credit portfolio health: PD migrations, provision coverage, top exposures
+  - Market risk: VaR, SVaR, top concentration exposures
+  - Liquidity metrics: LCR, NSFR, funding concentration
+
+## Monitoring and Escalation
+- Define three-tier thresholds for all major metrics (Green / Amber / Red) with clear actions and owners.
+- Example mapping (apply per `as_of_date`):
+  - CAR: Green >=12%, Amber 10.5%-12%, Red <10.5%
+  - LCR: Green >= 115%, Amber 110%-115%, Red <110%
+  - Desk VaR: Green below 80% of limit, Amber 80%-100%, Red >100%
+
+## Stress Testing Program
+- Monthly scenario runs using synthetic time series. Include reverse stress testing to identify scenarios that would breach capital or liquidity thresholds.
+
+## Data and Model Governance
+- Version control for synthetic data generator and policy calculation scripts.
+- Unit tests: create small reproducible test cases against `generate_fakebank_data.py` outputs to validate calculations.
+
+--
+This consolidated Risk Management Framework is tailored to the FakeBank synthetic datasets to facilitate governance, analytics and educational exercises.
+```
 📑 Risk Management Framework
 1. Purpose and Scope
 

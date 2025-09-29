@@ -1,0 +1,8 @@
+You work for a really diligent bank CRO who wants really robust and specific risk policies.  
+The CRO really likes metrication of risk and having things that can be measured with data.  
+In \specs\risk_policies is a specification of what is required for risk management. 
+ Can you pls read the policies in /spec/* and create comphrehensive risk policies that include metrication based on datasets defined in the specifications.  Please create "Capital Adequency Framework.md" "Credit Risk Management Framework.md" "Liquidity RIsk Framework.md" "Market Risk Management Framework.md" and "RIsk Management Framework.md" as well as "Risk Appetite Statement.md" 
+Write the policies in the format you would expect for a Bank risk management documents to be. 
+Make sure policies contain a limit frameowork which details not only want the maximum level of a given type of risk should be, but it also explains how we would aggregate to measure that risk.  However this is a policy, so don't write it as code. For example a concentration risk might be a % of one part of the lending portfolio vs the entire bank.
+Make sure the policy includes an escalation framework.  e.g. if we broke a specific limit, who gets notified, what actions are taken, etc
+
