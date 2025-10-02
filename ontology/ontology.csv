@@ -1,0 +1,175 @@
+Subject,Predicate,Object
+risk,has type,credit risk
+risk,has type,market risk
+risk,has type,liquidity risk
+
+bank,has_framework,risk appetite framework
+risk appetite framework,measures,credit risk
+risk appetite framework,measures,market risk
+risk appetite framework,measures,liquidity risk
+risk appetite framework,has_metric,capital adequacy ratio
+risk appetite framework,has_metric,liquidity coverage ratio
+risk appetite framework,has_metric,net stable funding ratio
+risk appetite framework,has_metric,value at risk
+risk appetite framework,sets_limit_for,capital adequacy ratio
+risk appetite framework,sets_limit_for,liquidity coverage ratio
+risk appetite framework,sets_limit_for,net stable funding ratio
+risk appetite framework,sets_limit_for,value at risk
+risk appetite framework,owned_by,board
+risk appetite framework,implemented_by,cro
+risk appetite framework,approved_by,board
+
+metric,has_threshold,limit
+metric,has_threshold,alert
+metric,has_threshold,breach
+
+# Credit risk concepts
+credit risk,has_concept,probability of default
+credit risk,has_concept,loss given default
+credit risk,has_concept,exposure at default
+credit risk,has_concept,risk weighted assets
+credit risk,has_concept,provisions
+credit risk,has_concept,write off
+credit risk,has_concept,collateral
+
+probability of default,abbrev,pd
+loss given default,abbrev,lgd
+exposure at default,abbrev,ead
+risk weighted assets,abbrev,rwa
+capital adequacy ratio,abbrev,car
+
+expected loss,formula,EL = PD*LGD*EAD
+risk weighted assets,depends_on,probability of default
+risk weighted assets,depends_on,loss given default
+risk weighted assets,depends_on,exposure at default
+risk weighted assets,depends_on,maturity
+capital requirement,depends_on,probability of default
+capital requirement,depends_on,loss given default
+capital requirement,depends_on,exposure at default
+
+pd,derived_from,credit rating
+lgd,derived_from,collateral type
+lgd,derived_from,recovery rate
+
+account,belongs_to,customer
+loan account,is_a,account
+credit exposure,linked_to,account
+credit exposure,secured_by,collateral
+collateral,has_type,property
+collateral,has_type,vehicle
+collateral,has_type,deposit
+collateral,has_attribute,valuation
+credit exposure,has_attribute,limit
+credit exposure,has_attribute,utilisation
+credit exposure,has_attribute,arrears status
+provisions,linked_to,expected loss
+write off,linked_to,defaulted exposure
+
+capital adequacy ratio,is_a,metric
+capital adequacy ratio,computed_from,capital and rwa
+capital adequacy ratio,unit,percent
+capital adequacy ratio,reported_to,board
+capital adequacy ratio,frequency,monthly
+
+# Market risk concepts
+market risk,has_concept,position
+market risk,has_concept,desk
+market risk,has_concept,mark to market
+market risk,has_concept,sensitivity
+market risk,has_metric,value at risk
+market risk,has_metric,stressed value at risk
+market risk,has_metric,expected shortfall
+
+value at risk,abbrev,var
+stressed value at risk,abbrev,svar
+expected shortfall,abbrev,es
+mark to market,abbrev,mtm
+
+position,has_attribute,notional
+position,has_attribute,currency
+position,has_attribute,mark to market
+position,belongs_to,desk
+position,exposes_to,market risk
+
+sensitivity,has_type,delta
+sensitivity,has_type,vega
+sensitivity,has_type,gamma
+sensitivity,has_type,rho
+sensitivity,has_type,theta
+
+var,parameters,confidence level
+var,parameters,horizon
+backtesting,compares,var to pnl
+pnl,has_type,daily pnl
+pnl,linked_to,position
+
+# Liquidity risk concepts
+liquidity risk,has_concept,high quality liquid assets
+liquidity risk,has_concept,net cash outflows 30d
+liquidity risk,has_concept,available stable funding
+liquidity risk,has_concept,required stable funding
+liquidity risk,has_concept,liquidity buffer
+liquidity risk,has_concept,maturity ladder
+liquidity risk,has_metric,liquidity coverage ratio
+liquidity risk,has_metric,net stable funding ratio
+
+liquidity coverage ratio,abbrev,lcr
+net stable funding ratio,abbrev,nsfr
+
+liquidity coverage ratio,formula,HQLA / net cash outflows 30d
+net stable funding ratio,formula,available stable funding / required stable funding
+liquidity buffer,composed_of,high quality liquid assets
+survival horizon,depends_on,cash inflows
+survival horizon,depends_on,cash outflows
+
+funding source,has_type,retail deposit
+funding source,has_type,wholesale
+funding source,has_type,interbank
+funding concentration,measures,dependence on source
+stress testing,applies_to,liquidity risk
+
+# Governance links
+risk appetite framework,covers,credit risk
+risk appetite framework,covers,market risk
+risk appetite framework,covers,liquidity risk
+risk appetite framework,has_policy,limits and escalation
+limits and escalation,includes,limits
+limits and escalation,includes,alerts
+limits and escalation,includes,breaches
+
+# Relations between concepts and metrics
+car,measures,capital adequacy
+car,computed_from,capital and rwa
+lcr,measures,short term liquidity resiliency
+lcr,computed_from,hqla and net cash outflows 30d
+nsfr,measures,structural funding stability
+nsfr,computed_from,available stable funding and required stable funding
+var,measures,market risk loss at confidence
+es,measures,tail risk beyond var
+
+# General organisational structure
+bank,has_unit,business line
+bank,has_unit,treasury
+bank,has_unit,trading
+bank,has_unit,retail
+bank,has_unit,corporate
+portfolio,aggregates,account
+portfolio,aggregates,position
+customer,has_attribute,segment
+customer,has_attribute,geography
+
+# Risk to exposure links
+credit risk,measured_on,credit exposure
+market risk,measured_on,position
+liquidity risk,measured_on,liquidity profile
+
+# Limits examples
+capital adequacy ratio,has_limit,>= 10.5 percent
+liquidity coverage ratio,has_limit,>= 100 percent
+net stable funding ratio,has_limit,>= 100 percent
+value at risk,has_limit,per desk limit
+
+# Escalation examples
+metric,escalation_on_breach,notify cro
+metric,escalation_on_breach,report to board
+metric,escalation_on_breach,execute remediation plan

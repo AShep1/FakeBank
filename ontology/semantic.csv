@@ -1,0 +1,474 @@
+Subject,Predicate,Object
+credit risk,has dataset,loans.parquet
+credit risk,has dataset,loan_applications.parquet
+credit risk,has dataset,write_offs.parquet
+credit risk,has dataset,customer_interactions.parquet
+credit risk,has dataset,loan_securities.parquet
+market risk,has dataset,market_positions.parquet
+market risk,has dataset,market_risk_metrics.parquet
+market risk,has dataset,instrument_prices.parquet
+market risk,has dataset,market_events.parquet
+liquidity risk,has dataset,liquidity_positions.parquet
+liquidity risk,has dataset,funding_sources.parquet
+liquidity risk,has dataset,liquidity_metrics.parquet
+liquidity risk,has dataset,liquidity_events.parquet
+customers.parquet,has type,customer data
+loans.parquet,has type,loan data
+loan_applications.parquet,has type,application data
+write_offs.parquet,has type,write-off data
+customer_interactions.parquet,has type,interaction data
+loan_securities.parquet,has type,security data
+liquidity_positions.parquet,has type,liquidity position data
+funding_sources.parquet,has type,funding source data
+liquidity_metrics.parquet,has type,liquidity metric data
+liquidity_events.parquet,has type,liquidity event data
+market_positions.parquet,has type,market position data
+market_risk_metrics.parquet,has type,market risk metric data
+instrument_prices.parquet,has type,instrument price data
+market_events.parquet,has type,market event data
+# Domain to tables (from specs)
+credit risk,has_table,customers
+credit risk,has_table,loans
+credit risk,has_table,loan_applications
+credit risk,has_table,write_offs
+credit risk,has_table,credit_events
+credit risk,has_table,loan_securities
+liquidity risk,has_table,liquidity_positions
+liquidity risk,has_table,funding_sources
+liquidity risk,has_table,liquidity_metrics
+liquidity risk,has_table,liquidity_events
+market risk,has_table,market_positions
+market risk,has_table,market_risk_metrics
+market risk,has_table,instrument_prices
+market risk,has_table,market_events
+
+# Table specs mapping
+customers,table_in_spec,specs/customer.md
+loans,table_in_spec,specs/credit_risk.md
+loan_applications,table_in_spec,specs/credit_risk.md
+write_offs,table_in_spec,specs/credit_risk.md
+credit_events,table_in_spec,specs/credit_risk.md
+loan_securities,table_in_spec,specs/credit_risk.md
+liquidity_positions,table_in_spec,specs/liquidity_risk.md
+funding_sources,table_in_spec,specs/liquidity_risk.md
+liquidity_metrics,table_in_spec,specs/liquidity_risk.md
+liquidity_events,table_in_spec,specs/liquidity_risk.md
+market_positions,table_in_spec,specs/market_risk.md
+market_risk_metrics,table_in_spec,specs/market_risk.md
+instrument_prices,table_in_spec,specs/market_risk.md
+market_events,table_in_spec,specs/market_risk.md
+
+# Table keys (PK/FK) and common fields
+customers,has_pk,customer_id
+customers,has_field,name
+customers,has_field,date_of_birth
+customers,has_field,address
+customers,has_field,customer_since
+customers,has_field,segment
+
+loans,has_pk,loan_id
+loans,has_fk,customer_id->customers.customer_id
+loans,has_field,as_of_date
+loans,has_field,loan_amount
+loans,has_field,credit_rating
+loans,has_field,lgd_rating
+loans,has_field,ead
+loans,has_field,rwa
+loans,has_field,capital
+loans,has_field,provisions
+loans,has_field,arrears
+loans,has_field,sales_channel
+loans,has_field,industry
+loans,has_field,geography
+loans,has_field,product_type
+loans,has_field,purpose
+loans,has_field,currency
+loans,has_field,origination_date
+loans,has_field,maturity_date
+loans,has_field,interest_rate
+loans,has_field,repayment_type
+loans,has_field,collateral_type
+
+loan_applications,has_pk,application_id
+loan_applications,has_fk,customer_id->customers.customer_id
+loan_applications,has_field,application_date
+loan_applications,has_field,amount_requested
+loan_applications,has_field,status
+loan_applications,has_field,product_type
+
+write_offs,has_pk,write_off_id
+write_offs,has_fk,loan_id->loans.loan_id
+write_offs,has_field,as_of_date
+write_offs,has_field,amount_written_off
+write_offs,has_field,reason
+
+credit_events,has_pk,event_id
+credit_events,has_fk,loan_id->loans.loan_id
+credit_events,has_field,as_of_date
+credit_events,has_field,event_type
+credit_events,has_field,event_details
+
+loan_securities,has_pk,security_id
+loan_securities,has_fk,loan_id->loans.loan_id
+loan_securities,has_field,as_of_date
+loan_securities,has_field,security_type
+loan_securities,has_field,security_value
+loan_securities,has_field,address
+loan_securities,has_field,lien_type
+loan_securities,has_field,ownership_details
+
+liquidity_positions,has_pk,position_id
+liquidity_positions,has_fk,customer_id->customers.customer_id
+liquidity_positions,has_field,as_of_date
+liquidity_positions,has_field,asset_type
+liquidity_positions,has_field,amount
+liquidity_positions,has_field,maturity_date
+
+funding_sources,has_pk,funding_id
+funding_sources,has_field,as_of_date
+funding_sources,has_field,source_type
+funding_sources,has_field,amount
+funding_sources,has_field,cost
+
+liquidity_metrics,has_pk,metric_id
+liquidity_metrics,has_field,as_of_date
+liquidity_metrics,has_field,LCR
+liquidity_metrics,has_field,NSFR
+liquidity_metrics,has_field,cash_inflows
+liquidity_metrics,has_field,cash_outflows
+
+liquidity_events,has_pk,event_id
+liquidity_events,has_field,as_of_date
+liquidity_events,has_field,event_type
+liquidity_events,has_field,event_details
+
+market_positions,has_pk,position_id
+market_positions,has_fk,customer_id->customers.customer_id
+market_positions,has_field,as_of_date
+market_positions,has_field,desk
+market_positions,has_field,instrument
+market_positions,has_field,notional
+market_positions,has_field,market_value
+
+market_risk_metrics,has_pk,metric_id
+market_risk_metrics,has_fk,position_id->market_positions.position_id
+market_risk_metrics,has_field,as_of_date
+market_risk_metrics,has_field,VaR
+market_risk_metrics,has_field,SVaR
+market_risk_metrics,has_field,expected_shortfall
+market_risk_metrics,has_field,volatility
+
+instrument_prices,has_pk,price_id
+instrument_prices,has_field,instrument
+instrument_prices,has_field,as_of_date
+instrument_prices,has_field,price
+instrument_prices,has_field,currency
+
+market_events,has_pk,event_id
+market_events,has_field,as_of_date
+market_events,has_field,instrument
+market_events,has_field,event_type
+market_events,has_field,event_details
+
+# Common concepts
+panel_snapshot,applies_to,credit risk
+panel_snapshot,applies_to,liquidity risk
+panel_snapshot,applies_to,market risk
+panel_snapshot,field,as_of_date
+
+# Allowed values (from specs)
+credit_rating,allowed_value,A
+credit_rating,allowed_value,B
+credit_rating,allowed_value,C
+credit_rating,allowed_value,D
+credit_rating,allowed_value,E
+credit_rating,order,A<B<C<D<E
+
+lgd_rating,allowed_value,Low
+lgd_rating,allowed_value,Medium
+lgd_rating,allowed_value,High
+lgd_rating,order,Low<Medium<High
+
+sales_channel,allowed_value,Branch
+sales_channel,allowed_value,Broker
+sales_channel,allowed_value,Online
+sales_channel,allowed_value,Direct
+sales_channel,allowed_value,Mobile
+
+industry,example_value,Agriculture
+industry,example_value,Mining
+industry,example_value,Manufacturing
+industry,example_value,Construction
+industry,example_value,Retail Trade
+industry,example_value,Accommodation & Food Services
+industry,example_value,Financial & Insurance Services
+industry,example_value,Health Care & Social Assistance
+industry,example_value,Education & Training
+industry,example_value,Information Media & Telecommunications
+industry,example_value,Professional Services
+industry,example_value,Public Administration
+
+geography,allowed_value,NSW
+geography,allowed_value,VIC
+geography,allowed_value,QLD
+geography,allowed_value,WA
+geography,allowed_value,SA
+geography,allowed_value,TAS
+geography,allowed_value,ACT
+geography,allowed_value,NT
+
+product_type,allowed_value,Mortgage
+product_type,allowed_value,Personal Loan
+product_type,allowed_value,Business Loan
+product_type,allowed_value,Credit Card
+product_type,allowed_value,Overdraft
+
+purpose,allowed_value,Purchase
+purpose,allowed_value,Refinance
+purpose,allowed_value,Working Capital
+purpose,allowed_value,Investment
+purpose,allowed_value,Debt Consolidation
+
+currency,allowed_value,AUD
+currency,allowed_value,USD
+currency,allowed_value,EUR
+currency,allowed_value,GBP
+currency,allowed_value,NZD
+
+repayment_type,allowed_value,Principal & Interest
+repayment_type,allowed_value,Interest Only
+
+collateral_type,allowed_value,Property
+collateral_type,allowed_value,Vehicle
+collateral_type,allowed_value,Deposit
+collateral_type,allowed_value,Unsecured
+collateral_type,allowed_value,Equipment
+
+lien_type,allowed_value,First Lien
+lien_type,allowed_value,Second Lien
+lien_type,allowed_value,Third Lien
+lien_type,order,First Lien<Second Lien<Third Lien
+
+application_status,allowed_value,Approved
+application_status,allowed_value,Rejected
+application_status,allowed_value,Pending
+
+credit_event_type,allowed_value,Default
+credit_event_type,allowed_value,Restructure
+credit_event_type,allowed_value,Extension
+
+asset_type,allowed_value,Cash
+asset_type,allowed_value,Deposit
+asset_type,allowed_value,Security
+asset_type,allowed_value,Government Bond
+asset_type,allowed_value,Corporate Bond
+
+funding_source_type,allowed_value,Interbank
+funding_source_type,allowed_value,Retail
+funding_source_type,allowed_value,Wholesale
+
+liquidity_metric_type,allowed_value,LCR
+liquidity_metric_type,allowed_value,NSFR
+liquidity_metric_type,allowed_value,Cash Inflows
+liquidity_metric_type,allowed_value,Cash Outflows
+
+liquidity_event_type,allowed_value,Stress
+liquidity_event_type,allowed_value,Withdrawal
+liquidity_event_type,allowed_value,Deposit
+
+desk,allowed_value,Equities
+desk,allowed_value,Fixed Income
+desk,allowed_value,FX
+desk,allowed_value,Commodities
+desk,allowed_value,Derivatives
+
+instrument,allowed_value,ASX Equity
+instrument,allowed_value,AUD Bond
+instrument,allowed_value,FX Pair
+instrument,allowed_value,Commodity
+instrument,allowed_value,Derivative
+
+market_metric_type,allowed_value,VaR
+market_metric_type,allowed_value,SVaR
+market_metric_type,allowed_value,Expected Shortfall
+market_metric_type,allowed_value,Volatility
+
+market_event_type,allowed_value,Shock
+market_event_type,allowed_value,News
+market_event_type,allowed_value,Regulatory
+
+segment,allowed_value,Retail
+segment,allowed_value,Corporate
+segment,allowed_value,SME
+
+# Domain context
+credit risk,regulator,APRA
+credit risk,regulator,ASIC
+liquidity risk,regulator,APRA
+liquidity risk,regulator,ASIC
+market risk,regulator,APRA
+market risk,regulator,ASIC
+dataset,currency,AUD
+
+# Generation logic (high-level)
+loans,generation_rule,monthly_panel_with_as_of_date
+loans,generation_rule,regular_change_approx_±2_percent
+loans,generation_rule,material_change_for_~1_percent_loans
+loans,generation_rule,PD_LGD_migration_2-5_percent_per_month
+liquidity_positions,generation_rule,positions_by_customer_and_asset_type
+market_positions,generation_rule,positions_by_desk_and_instrument
+liquidity risk,has_policy,Liquidity Risk Framework.md
+liquidity risk,policy_url,https://fakebankdata.s3.us-east-1.amazonaws.com/policies/Liquidity+Risk+Framework.md
+liquidity risk,has_spec,specs/liquidity_risk.md
+credit risk,has_policy,Credit Risk Management Framework.md
+credit risk,policy_url,https://fakebankdata.s3.us-east-1.amazonaws.com/policies/Credit+Risk+Management+Framework.md
+credit risk,has_spec,specs/credit_risk.md
+market risk,has_policy,Market Risk Management Framework.md
+market risk,policy_url,https://fakebankdata.s3.us-east-1.amazonaws.com/policies/Market+Risk+Management+Framework.md
+market risk,has_spec,specs/market_risk.md
+risk management,has_policy,Risk Management Framework.md
+risk management,policy_url,https://fakebankdata.s3.us-east-1.amazonaws.com/policies/Risk+Management+Framework.md
+risk management,has_policy,Risk Appetite Statement.md
+risk management,policy_url,https://fakebankdata.s3.us-east-1.amazonaws.com/policies/Risk+Appetite+Statement.md
+capital adequacy,has_policy,Capital Adequacy Framework.md
+capital adequacy,policy_url,https://fakebankdata.s3.us-east-1.amazonaws.com/policies/Capital+Adequacy+Framework.md
+
+# Metrics (types and relationships)
+CAR,has type,metric
+CAR,metric_of,capital adequacy
+CAR,computed_from,loans.capital and loans.rwa
+CAR,formula,Capital_total/RWA_total
+CAR,threshold_green,>=12%
+CAR,threshold_amber,10.5%-12%
+CAR,threshold_red,<10.5%
+CAR,frequency,monthly
+CAR,owner,CRO
+CAR,spec,specs/risk_policies.md
+CAR,table,data/loans.parquet
+
+single customer exposure,has type,metric
+single customer exposure,metric_of,credit risk
+single customer exposure,computed_from,loans.ead by customer_id
+single customer exposure,limit,<=5% of Capital_total
+single customer exposure,alert,>=4.5% of Capital_total
+single customer exposure,frequency,monthly
+single customer exposure,owner,Head of Credit
+single customer exposure,table,data/loans.parquet
+
+provision coverage ratio,has type,metric
+provision coverage ratio,metric_of,credit risk
+provision coverage ratio,computed_from,loans.provisions and expected_losses
+provision coverage ratio,threshold_green,>=1.5%
+provision coverage ratio,threshold_amber,1.2%-1.5%
+provision coverage ratio,threshold_red,<1.2%
+provision coverage ratio,frequency,monthly
+provision coverage ratio,table,data/loans.parquet
+
+arrears ratio,has type,metric
+arrears ratio,metric_of,credit risk
+arrears ratio,computed_from,loans.arrears and loans.loan_amount
+arrears ratio,escalation,>5% portfolio
+arrears ratio,frequency,monthly
+arrears ratio,table,data/loans.parquet
+
+avg credit rating score,has type,metric
+avg credit rating score,metric_of,credit risk
+avg credit rating score,computed_from,loans.ead and loans.credit_rating
+avg credit rating score,target,<=2
+avg credit rating score,alert,>2.2
+avg credit rating score,breach,>3.0
+avg credit rating score,frequency,monthly
+avg credit rating score,table,data/loans.parquet
+
+LCR,has type,metric
+LCR,metric_of,liquidity risk
+LCR,computed_from,liquidity_metrics.HQLA and net_cash_outflows_30d
+LCR,threshold_green,>=110%
+LCR,threshold_amber,100%-110%
+LCR,threshold_red,<100%
+LCR,frequency,monthly
+LCR,table,data/liquidity_metrics.parquet
+
+NSFR,has type,metric
+NSFR,metric_of,liquidity risk
+NSFR,computed_from,available_stable_funding and required_stable_funding
+NSFR,threshold_green,>=105%
+NSFR,threshold_amber,100%-105%
+NSFR,threshold_red,<100%
+NSFR,frequency,monthly
+NSFR,table,data/liquidity_metrics.parquet
+
+funding concentration,has type,metric
+funding concentration,metric_of,liquidity risk
+funding concentration,computed_from,funding_sources.amount by source_type
+funding concentration,limit,<=20%
+funding concentration,alert,>=18%
+funding concentration,frequency,monthly
+funding concentration,table,data/funding_sources.parquet
+
+survival horizon,has type,metric
+survival horizon,metric_of,liquidity risk
+survival horizon,limit,>=30 days
+survival horizon,frequency,monthly
+survival horizon,table,data/liquidity_positions.parquet
+
+desk VaR limit,has type,metric
+desk VaR limit,metric_of,market risk
+desk VaR limit,computed_from,market_risk_metrics.VaR by desk
+desk VaR limit,limit,<=10000000 AUD
+desk VaR limit,alert,>=80% of limit
+desk VaR limit,breach,>100% of limit
+desk VaR limit,frequency,monthly
+desk VaR limit,table,data/market_risk_metrics.parquet
+
+position concentration,has type,metric
+position concentration,metric_of,market risk
+position concentration,computed_from,instrument market_value / total desk market_value
+position concentration,limit,<=10%
+position concentration,alert,>=9%
+position concentration,frequency,monthly
+position concentration,table,data/market_positions.parquet
+
+volatility threshold,has type,metric
+volatility threshold,metric_of,market risk
+volatility threshold,computed_from,market_risk_metrics.volatility
+volatility threshold,alert,>20%
+volatility threshold,frequency,monthly
+volatility threshold,table,data/market_risk_metrics.parquet
+
+# Policy metadata
+Liquidity Risk Framework.md,policy_type,framework
+Liquidity Risk Framework.md,owner,Head of Treasury
+Liquidity Risk Framework.md,owner,CRO
+Liquidity Risk Framework.md,frequency,monthly
+
+Credit Risk Management Framework.md,policy_type,framework
+Credit Risk Management Framework.md,owner,Head of Credit
+Credit Risk Management Framework.md,owner,CRO
+Credit Risk Management Framework.md,frequency,monthly
+
+Market Risk Management Framework.md,policy_type,framework
+Market Risk Management Framework.md,owner,Head of Trading
+Market Risk Management Framework.md,owner,CRO
+Market Risk Management Framework.md,frequency,daily_equivalent
+
+Capital Adequacy Framework.md,policy_type,framework
+Capital Adequacy Framework.md,owner,CRO
+Capital Adequacy Framework.md,owner,CFO
+Capital Adequacy Framework.md,frequency,monthly
+
+Risk Management Framework.md,policy_type,framework
+Risk Management Framework.md,owner,CRO
+Risk Management Framework.md,frequency,monthly
+
+Risk Appetite Statement.md,policy_type,statement
+Risk Appetite Statement.md,owner,Board
+Risk Appetite Statement.md,frequency,annual
+
+# Escalation examples
+CAR,escalation_amber,executive_review_within_2_business_days
+CAR,escalation_red,board_escalation_within_1_business_day
+LCR,escalation_amber,funding_plan_within_10_business_days
+LCR,escalation_red,contingency_funding_immediate
+desk VaR limit,escalation_amber,hedge_plan_within_24h
+desk VaR limit,escalation_red,immediate_de_risk_and_board_notification
